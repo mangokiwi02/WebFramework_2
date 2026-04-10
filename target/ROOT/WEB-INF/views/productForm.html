@@ -115,6 +115,8 @@
         </div>
 
     </form>
-
+    <footer style="text-align: center; margin-top: 20px; color: gray;">
+        <p th:text="${'실습 수행 일시: ' + #temporals.format(#temporals.createNow(), 'yyyy년 MM월 dd일 (E) a hh:mm:ss') + ' | 학번: 2020XXXXX | 성명: 홍길동'}"></p>
+    </footer>
 </body>
 </html>
