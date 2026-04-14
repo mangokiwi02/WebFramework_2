@@ -37,6 +37,13 @@ USE productdb;
 -- JPA @Entity Product 클래스의 필드와 매핑됩니다.
 -- DbConfig에서 hibernate.hbm2ddl.auto=validate 설정으로
 -- Hibernate가 이 테이블과 엔티티 클래스의 매핑을 검증합니다.
+-- =====================================================================
+-- 카테고리 테이블 생성 (추가됨)
+-- =====================================================================
+CREATE TABLE category (
+    category_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS product (
     -- AUTO_INCREMENT: INSERT 시 자동으로 1씩 증가하는 기본 키

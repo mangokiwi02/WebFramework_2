@@ -37,6 +37,9 @@
         Model에 successMessage 속성이 있을 때만 이 div를 렌더링합니다.
         RedirectAttributes.addFlashAttribute()로 전달된 값이 여기 표시됩니다.
     -->
+    <a href="/products/new" class="btn btn-primary">+ 새 상품 등록</a>
+
+    <a th:href="@{/categories}" class="btn btn-info">카테고리 관리 가기</a>
     <div class="alert-success" th:if="${successMessage}">
         <!-- th:text: XSS 방지를 위해 HTML 이스케이핑 후 텍스트를 표시합니다. -->
         <span th:text="${successMessage}">성공 메시지</span>

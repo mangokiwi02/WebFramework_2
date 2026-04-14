@@ -2,7 +2,7 @@ package kr.ac.hansung.cse.repository;
 
 import jakarta.persistence.EntityManager;
 
-import kr.ac.hansung.cse.domain.Category;
+import kr.ac.hansung.cse.model.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
