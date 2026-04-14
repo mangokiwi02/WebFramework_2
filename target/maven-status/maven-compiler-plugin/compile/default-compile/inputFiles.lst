@@ -2,6 +2,8 @@ C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\c
 C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\config\WebAppInitializer.java
 C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\config\WebConfig.java
 C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\controller\ProductController.java
+C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\model\CategoryForm.java
 C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\model\Product.java
+C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\repository\CategoryRepository.java
 C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\repository\ProductRepository.java
 C:\Users\imchangsu\IdeaProjects\helloSpringMVC\src\main\java\kr\ac\hansung\cse\service\ProductService.java
