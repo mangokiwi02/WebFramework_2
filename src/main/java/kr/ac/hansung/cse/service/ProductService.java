@@ -116,4 +116,12 @@ public class ProductService {
     public void deleteProduct(Long id) {
         productRepository.delete(id);
     }
+
+    public List<Product> searchByName(String keyword) {
+        return productRepository.findByNameContaining(keyword);
+    }
+
+    public List<Product> searchByCategoryName(String categoryName) {
+        return productRepository.findByCategoryName(categoryName);
+    }
 }

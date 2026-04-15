@@ -1,7 +1,9 @@
 package kr.ac.hansung.cse.controller;
 
 import kr.ac.hansung.cse.model.Product;
+import kr.ac.hansung.cse.service.CategoryService;
 import kr.ac.hansung.cse.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +42,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
     /**
      * 생성자 주입 (Constructor Injection)
@@ -47,8 +50,9 @@ public class ProductController {
      * ProductService는 Root Context(DbConfig)의 빈이지만,
      * 자식 컨텍스트(Servlet Context)가 부모 빈을 참조할 수 있습니다.
      */
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     // ─────────────────────────────────────────────────────────────────
@@ -65,11 +69,28 @@ public class ProductController {
      * @return "productList" : ThymeleafViewResolver가 이 문자열을 받아
      *                         /WEB-INF/views/productList.html 파일을 렌더링합니다.
      */
-    @GetMapping
-    public String listProducts(Model model) {
-        List<Product> products = productService.getAllProducts();
+    @GetMapping // (또는 @GetMapping("/products"))
+    public String listProducts(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String categoryName, // 💡 Long categoryId 에서 변경!
+            Model model) {
+
+        List<Product> products;
+
+        if (keyword != null && !keyword.isBlank()) {
+            products = productService.searchByName(keyword);
+        } else if (categoryName != null && !categoryName.isBlank()) {
+            products = productService.searchByCategoryName(categoryName); // 💡 변경됨
+        } else {
+            products = productService.getAllProducts();
+        }
+
         model.addAttribute("products", products);
-        return "productList"; // → /WEB-INF/views/productList.html
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("categoryName", categoryName); // 💡 화면에 선택 상태 유지를 위해 전달
+
+        return "productList"; // (혹은 폴더 구조에 따라 "products/productList")
     }
 
     // ─────────────────────────────────────────────────────────────────
