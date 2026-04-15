@@ -29,8 +29,23 @@
     </style>
 </head>
 <body>
+<!-- 검색 폼: form method="get" → URL 파라미터로 전송 -->
+<form th:action="@{/products}" method="get">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="상품명 검색"/>
+    <select name="categoryName">
+        <option value="">-- 전체 카테고리 --</option>
 
-    <h1>상품 목록</h1>
+        <option th:each="cat : ${categories}"
+                th:value="${cat.name}"
+                th:text="${cat.name}"
+                th:selected="${cat.name == categoryName}"></option>
+    </select>
+    <button type="submit">검색</button>
+</form>
+<!-- 결과 없음: #lists.isEmpty()로 빈 리스트 감지 -->
+<p th:if="${#lists.isEmpty(products)}">검색 결과가 없습니다.</p>
+
+<h1>상품 목록</h1>
 
     <!--
         th:if="${successMessage}":
