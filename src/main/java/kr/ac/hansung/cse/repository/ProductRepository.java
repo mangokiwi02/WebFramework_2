@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import kr.ac.hansung.cse.model.Product;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -39,8 +40,9 @@ import java.util.Optional;
  * 트랜잭션 종료 시 변경된 엔티티를 자동으로 DB에 반영합니다.(더티 체킹)
  */
 @Repository
+@RequiredArgsConstructor
 public class ProductRepository {
-
+    private final EntityManager em;
     /**
      * @PersistenceContext : Spring이 EntityManager를 주입해 주는 어노테이션입니다.
      *
@@ -127,5 +129,20 @@ public class ProductRepository {
         if (product != null) {
             entityManager.remove(product);
         }
+    }
+
+    public List<Product> findByNameContaining(String keyword) {
+
+        return em.createQuery(
+                        "SELECT p FROM Product p WHERE p.name LIKE :keyword", Product.class)
+                .setParameter("keyword", "%" + keyword + "%")
+                .getResultList();
+    }
+
+    public List<Product> findByCategoryName(String categoryName) {
+        return em.createQuery(
+                        "SELECT p FROM Product p WHERE p.category = :cName", Product.class)
+                .setParameter("cName", categoryName)
+                .getResultList();
     }
 }
